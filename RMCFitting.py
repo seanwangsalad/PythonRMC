@@ -165,8 +165,15 @@ if __name__ == "__main__":
 
     try:
         indexs = np.where(y_coords == 2)
-        position1 = str(round(x_coords[indexs[0][0]], 4))
-        position2 = str(round(x_coords[indexs[0][1]], 4))
+        actualIndex = []
+        previous = -100
+        for i in indexs[0]:
+            if round(previous, 0) != round(x_coords[i], 0):
+                actualIndex.append(x_coords[i])
+            previous = x_coords[i]
+
+        position1 = str(round(actualIndex[0], 4))
+        position2 = str(round(actualIndex[1], 4))
         print("μ is under 2 from " + position1 + " to " + position2)
     except IndexError:
         print("range not found: μ may not be under 2")
