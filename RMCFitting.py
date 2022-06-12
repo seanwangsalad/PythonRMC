@@ -5,7 +5,7 @@ from numpy import log as ln
 from openpyxl import load_workbook
 
 
-x, y = np.meshgrid(np.arange(0, 2500, 0.01), np.arange(1, 5, 1))
+x, y = np.meshgrid(np.arange(0, 2000, 0.01), np.arange(1, 5, 0.05))
 
 
 
