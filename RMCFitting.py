@@ -68,55 +68,9 @@ def Langmuir(x, factor, type): #Function for Langmuir Plotting of RMC
 
         return S
 
-def Logistic(x, factor, type): #Function for Logistic Plotting of RMC
-    BA = b - a
-    x = x * factor
-    val = c / x
-    valC = val ** d  # (c/x)^d
-    valU = (1 + valC) ** e  # (1+(c/x)^d)^e
-    if type == 1:
-        valU2 = 1 + valC
-        valU2 **= (-e - 1)  # (1+(c/x)^d)^(-e-1)
-
-        eqOne = 1 - (1/valU)
-        eqOne *= sigmaA
-        eqOne **= 2
-
-        eqTwo = 1/valU
-        eqTwo *= sigmaB
-        eqTwo **= 2
-
-        eqThree = (e*BA)*(d*valC)*(valU2)
-        eqThree /= c
-        eqThree *= -1
-        eqThree *= sigmaC
-        eqThree **= 2
-
-        eqFour = (e*BA)*(ln(val))*(valU2)*(valC)
-        eqFour *= -1
-        eqFour *= sigmaD
-        eqFour **= 2
-
-
-        eqFive = (BA)*(ln((1+valC)))
-        eqFive /= valU
-        eqFive *= -1
-        eqFive *= sigmaE
-        eqFive **= 2
-
-        return eqOne + eqTwo + eqThree + eqFour + eqFive
-
-    if type == 2:
-        S = 1 / valU
-        S *= BA
-        S += a
-        return S
-
-
-
-
+    
 def getGraph():
-    sumB = Langmuir(x, 1, 1) + Langmuir(x, y, 1) #Replace Langmuir with Logistic if using logistic (need to also do this again, scroll down)
+    sumB = Langmuir(x, 1, 1) + Langmuir(x, y, 1) 
     sumB = np.sqrt(sumB)
     sumT = Langmuir(x, y, 2) - Langmuir(x, 1, 2)
     equation = sumT/sumB
@@ -145,7 +99,7 @@ if __name__ == "__main__":
     for i in range(1, len(sheet[read]) + 1, 1):
         X = sheet[read+str(i)].value
         for μ in np.arange(1, 19, 0.0004): #if many values missing from excel sheet change from 0.0004 to 0.0001
-            sumB = Langmuir(X, 1, 1) + Langmuir(X, μ, 1) #Replace Langmuir with Logistic if using logistic
+            sumB = Langmuir(X, 1, 1) + Langmuir(X, μ, 1) 
             sumB = np.sqrt(sumB)
 
             sumT = Langmuir(X, μ, 2) - Langmuir(X, 1, 2)
@@ -164,6 +118,14 @@ if __name__ == "__main__":
     print("μ min = " + min_value + " at x = " + min_pos)
 
     try:
+        indexs5 = np.where(y_coords == 5)
+        position51 = str(round(x_coords[indexs5[0][0]], 4))
+        position52 = str(round(x_coords[indexs5[0][1]], 4))
+        print("μ is under 5 from " + position51 + " to " + position52)
+    except IndexError:
+        print("range not found: μ may not be under 5")
+        pass
+    try:
         indexs = np.where(y_coords == 2)
         actualIndex = []
         previous = -100
@@ -175,10 +137,10 @@ if __name__ == "__main__":
         position1 = str(round(actualIndex[0], 4))
         position2 = str(round(actualIndex[1], 4))
         print("μ is under 2 from " + position1 + " to " + position2)
+
     except IndexError:
         print("range not found: μ may not be under 2")
         pass
-
 
 
 
