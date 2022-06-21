@@ -7,15 +7,12 @@ from openpyxl import load_workbook
 
 x, y = np.meshgrid(np.arange(0, 2000, 0.01), np.arange(1, 5, 0.05))
 
-
-
 wb = load_workbook("x_valuesBook.xlsx")
 sheet = wb["Sheet1"]
 read = "A"
 write = "B"
 
-#z = 4.6041 #Critical Value from Corresponding 2 sided t-test confidence interval
-z = 2.7764
+z = 4.6041 #Critical Value from Corresponding 2 sided t-test confidence interval
 ##VARIABLE FOR LANGMUIR
 
 Smin = 1.46396
@@ -26,19 +23,6 @@ k = 329.93951
 σSmax = 4.82143
 σk = 12.59838
 
-##Variables for Logisitc
-
-a = 1.46033
-b = 176.46
-c = 360.4
-d = 0.864
-e = 1.161
-
-sigmaA = 0.0122
-sigmaB = 6.775
-sigmaC = 15.28
-sigmaD = 0.0463
-sigmaE = 0.07955
 
 def Langmuir(x, factor, type): #Function for Langmuir Plotting of RMC
     x = x * factor
