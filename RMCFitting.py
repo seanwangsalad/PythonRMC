@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
     for i in range(1, len(sheet[read]) + 1, 1):
         X = sheet[read+str(i)].value
-        for μ in np.arange(1, 19, 0.0004): #if many values missing from excel sheet change from 0.0004 to 0.0001
+        for μ in np.arange(1, 19, 0.0004): #if many values missing from excel sheet change from 0.0004 to 0.0001, but this may crash older computers.
             sumB = Langmuir(X, 1, 1) + Langmuir(X, μ, 1) 
             sumB = np.sqrt(sumB)
 
