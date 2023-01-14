@@ -1,6 +1,6 @@
-##Based on the paper: 
+##Paper associated with this code: 
 ##Plasmon-enhanced, Quantitative Lateral Flow Assay for Femtomolar Detection of Protein Biomarkers in Point-of-care Settings. Nature Biomedical Engineering 
-##Accepted 6/22/2022
+##Accepted 6/20/2022
 ##By Gupta, R.; Gupta, P.; Wang, S.; Melnykov, A.; Jiang, Q.; Seth, A.; Wang, Z.; Morrissey, J.; George, I.; Gandra, S.; Sinha, P.; Storch, G.; Parikh, B.; Genin, G.; Singamanenei, S
 
 import numpy as np
