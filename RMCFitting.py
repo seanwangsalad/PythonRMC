@@ -10,16 +10,32 @@ import math
 from numpy import log as ln
 from openpyxl import load_workbook
 
+####IMPORTANT NOTES#####
+# This code works best when you set your concentration to a unit such that the boundaries
+# ranges from 0.0001 to 10000
+# There may be instabilities in the nonlinear calculation if you do not change ur units to such range
+# For Example: 
+#     My assay is from 100 µg/mL to 1000000 µg/mL, I will adjust to 
+#     0.1 mg/mL to 1000 mg/mL
 
+#The following line defines the x axis range (currently 0 to 2000 units with a step size of 0.01. You may
+#change this value depending on the wideness of your curve.
+
+#The 1 to 5 range represents the y axis, which is the µ value. This should not be changed above 10.
+
+########See notes above to change#######
 x, y = np.meshgrid(np.arange(0, 2000, 0.01), np.arange(1, 5, 0.05))
 
-wb = load_workbook("x_valuesBook.xlsx")
-sheet = wb["Sheet1"]
-read = "A"
-write = "B"
+########################################
+#Critical Value from Corresponding 2 sided t-test confidence interval: currently 99%. 
+z = 4.6041 
+#Change this value to another z score if you want a different confidence interval. 
 
-z = 4.6041 #Critical Value from Corresponding 2 sided t-test confidence interval
-##VARIABLE FOR LANGMUIR
+################################
+####VARIABLES FROM LANGMUIR#####
+################################
+#Replace the following values with values obtained from curve fitting
+#in Prism or OriginPro using a Langmuir binding isotherm
 
 Smin = 1.46396
 Smax = 154.38999
@@ -29,6 +45,14 @@ k = 329.93951
 σSmax = 4.82143
 σk = 12.59838
 
+################################
+################################
+################################
+
+wb = load_workbook("x_valuesBook.xlsx") ###DO NOT CHANGE. MAKE SURE THIS XLSX FILE IS IN THE SAME DIRECTORY AS THIS FILE. 
+sheet = wb["Sheet1"]
+read = "A"
+write = "B"
 
 def Langmuir(x, factor, type): #Function for Langmuir Plotting of RMC
     x = x * factor
